@@ -1,0 +1,17 @@
+.loading {
+    position: absolute;
+    top: calc(50% - 3em);
+    left: calc(50%);
+    transform: rotate(0deg);
+    width: 8em;
+    height: 8em;
+    border: 1em solid #f3f3f3;
+    border-top: 1em solid #E60000;
+    border-radius: 100vw;
+    animation: loading .7s linear infinite;
+}
+  
+  @keyframes loading {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

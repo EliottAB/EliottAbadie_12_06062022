@@ -1,0 +1,18 @@
+.mainprofile{
+    padding: 4.25em 14em 0;
+}
+
+.hello{
+    font-size: 3em;
+}
+
+.hello span{
+    color: #FF0000;
+}
+
+.congrats{
+    margin-top: 1.6em;
+    font-size: 1.125em;
+    font-weight: 400;
+}
+
