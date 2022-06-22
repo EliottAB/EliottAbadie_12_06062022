@@ -49,7 +49,11 @@ export function Duration(props) {
       };
 
     function persTooltip(props){
-        return <p className="durationtooltip">{props.label}</p>
+        let text = null
+        if (props.active === true) {
+            text = props.payload[0].value + " min"
+        }
+        return <p className="durationtooltip">{text}</p>
     }
 
     return (
