@@ -1,5 +1,5 @@
 .mainprofile{
-    padding: 4.25em 14em 0;
+    padding: 4.25em 0 4.25em 14em;
 }
 
 .hello{
@@ -14,4 +14,11 @@
     margin-top: 1.6em;
     font-size: 1.125em;
     font-weight: 400;
+}
+
+.stats{
+    display: grid;
+    grid-template-columns: repeat(4, 17.39em);
+    margin-top: 4.8125em;
+    grid-gap: 1em;
 }

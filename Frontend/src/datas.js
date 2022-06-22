@@ -3,21 +3,21 @@ const isprod = false
 
 export async function getDatas(id, type){
     if (isprod) {
-        const data = await fetch("http://localhost:3000/user/" + id + type);
+        const data = await fetch("http://localhost:3000/" + id + type);
         const json = await data.json();
-        return json.data;
+        return transformDatas(type, json.data);
     }else{
         switch (type) {
             case "":
-                return mockdatas.USER_MAIN_DATA.find((current) => current.id === id)
+                return transformDatas(type, mockdatas.USER_MAIN_DATA.find((current) => current.id === id))
 
             case "/activity":
-                return transformActivity(id)
+                return transformDatas(type, mockdatas.USER_ACTIVITY.find(current => current.userId === id))
             case "/average-sessions":
-                return mockdatas.USER_AVERAGE_SESSIONS.find(current => current.userId === id)
+                return transformDatas(type, mockdatas.USER_AVERAGE_SESSIONS.find(current => current.userId === id))
 
             case "/performance":
-                return mockdatas.USER_PERFORMANCE.find(current => current.userId === id)
+                return transformDatas(type, mockdatas.USER_PERFORMANCE.find(current => current.userId === id))
         
             default:
                 break;
@@ -25,12 +25,40 @@ export async function getDatas(id, type){
     }
 }
 
-function transformActivity(id){
-    const data = mockdatas.USER_ACTIVITY.find(current => current.userId === id)
-    const transformeddatas = {
-        datas: data.sessions.map(session => (Object.assign({}, session, {day: session.day.slice(-2)}))),
-        minkg: Math.min(...data.sessions.map(session => session.kilogram)),
-        maxkg: Math.max(...data.sessions.map(session => session.kilogram))
+function transformDatas(type, data){
+    switch (type) {
+        case "":
+            return data
+
+        case "/activity":
+
+            let recentdata = []
+            for (let index = 31; index > -1 ; index--) {
+                if (data.sessions.length > index) {   
+                    recentdata.push(data.sessions[data.sessions.length - index -1])
+                }
+            }
+            const transformedactivity = {
+                datas: recentdata.map(session => (Object.assign({}, session, {day: session.day.slice(-2)}))),
+                minkg: Math.min(...recentdata.map(session => session.kilogram)),
+                maxkg: Math.max(...recentdata.map(session => session.kilogram))
+            }
+            return transformedactivity
+
+        case "/average-sessions":
+            const transformedsessions = []
+            data.sessions.forEach(element => {
+                transformedsessions.push(element.sessionLength)
+            });
+            return transformedsessions
+        case "/performance":
+            let transformedperformance = {}
+            data.data.forEach(element => {
+                transformedperformance[data.kind[element.kind]] = element.value
+            });
+            return transformedperformance
+            
+        default:
+            break;
     }
-    return transformeddatas
 }

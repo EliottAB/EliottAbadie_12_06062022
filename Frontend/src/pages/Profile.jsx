@@ -4,52 +4,71 @@ import { useState, useEffect } from "react"
 import { Header } from "../components/Header"
 import { Sidebar } from "../components/Sidebar"
 import { Loading } from "../components/Loading"
-import { Score } from "../components/Score"
 import { Activity } from "../components/Activity"
+import { Calories } from "../components/Calories"
+import { Score } from "../components/Score"
+import { Performances } from "../components/Performances"
+import { Duration } from "../components/Duration"
 import { getDatas } from "../datas"
 import "../css/pages/profile.css"
+import caloriesicon from "../assets/calories.svg"
+import glucidesicon from "../assets/glucides.svg"
+import lipidesicon from "../assets/lipides.svg"
+import proteinesicon from "../assets/proteines.svg"
 
 export function Profile(){
     let [datas, waitdatas] = useState()
     
     const { id } = useParams()
     let usersid = ["18", "12"]
-    let setuser = 18
+    let userid = 18
 
     if (usersid.includes(id)) {
-        setuser = parseInt(id)
+        userid = parseInt(id)
     }
     
     useEffect(()=>{
         (async () => {
             waitdatas({
-                globalInfos: await getDatas(setuser, ""),
-                activity: await getDatas(setuser, "/activity"),
-                sessions: await getDatas(setuser, "/average-sessions"),
-                performance: await getDatas(setuser, "/performance")
+                globalInfos: await getDatas(userid, ""),
+                activity: await getDatas(userid, "/activity"),
+                sessions: await getDatas(userid, "/average-sessions"),
+                performances: await getDatas(userid, "/performance")
             })
         })()
 
-    }, [setuser])
+    }, [userid])
     
 
-    return <React.Fragment>
-        <Header/>
-        <Sidebar/>
-        <main className="mainprofile">
-            {
-            datas ? 
-            
-            <React.Fragment>
-                <h2 className="hello">Bonjour <span>{datas.globalInfos.userInfos.firstName}</span></h2>
-                <p className="congrats">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
-                <Score></Score>
-                <Activity data={datas.activity.datas} minkg={datas.activity.minkg} maxkg={datas.activity.maxkg}></Activity>
-            </React.Fragment>
+    return (
+        <React.Fragment>
+            <Header/>
+            <Sidebar/>
+            <main className="mainprofile">
+                {
+                datas ? 
+                
+                <React.Fragment>
+                    <h2 className="hello">Bonjour <span>{datas.globalInfos.userInfos.firstName}</span></h2>
+                    <p className="congrats">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+                    <section className="stats">
+                        <Activity data={datas.activity.datas} minkg={datas.activity.minkg} maxkg={datas.activity.maxkg}></Activity>
+                        <ul className="calories">
+                            <Calories type="calories" icon={caloriesicon} count={datas.globalInfos.keyData.calorieCount}/>
+                            <Calories type="proteines" icon={proteinesicon} count={datas.globalInfos.keyData.proteinCount}/>
+                            <Calories type="glucides" icon={glucidesicon} count={datas.globalInfos.keyData.carbohydrateCount}/>
+                            <Calories type="lipides" icon={lipidesicon} count={datas.globalInfos.keyData.lipidCount}/>
+                        </ul>
+                        <Duration sessionsLength={datas.sessions}/>
+                        <Performances performances={datas.performances}/>
+                        <Score scorecontainer={datas.globalInfos}/>
+                    </section>
+                </React.Fragment>
 
-            : <Loading/>
-            }
-        </main>
-    </React.Fragment>
+                : <Loading/>
+                }
+            </main>
+        </React.Fragment>
+    )
 
 }

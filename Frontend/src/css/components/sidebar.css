@@ -5,8 +5,10 @@ aside{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     background-color: black;
     width: 7.31em;
+    min-height: calc(100% - 1.5em);
 }
 
 aside ul{

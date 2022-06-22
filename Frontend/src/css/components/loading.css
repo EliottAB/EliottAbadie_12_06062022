@@ -5,9 +5,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(100% - 7.31em);
+  width: calc(100vw - 7.31em);
   min-width: 14.31em;
-  height: calc(100% - 5.687em);
+  height: calc(100vh - 5.687em);
   min-height: 11.374em;
 }
 
