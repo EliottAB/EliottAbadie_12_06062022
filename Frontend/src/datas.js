@@ -2,21 +2,26 @@ import * as mockdatas from"./mockdatas"
 const isprod = false
 
 export async function getDatas(id, type){
+    let gettype = type
+    if (type === "today-score" || type === "key-data") {
+        gettype = ""
+    }
+
     if (isprod) {
-        const data = await fetch("http://localhost:3000/" + id + type);
+        const data = await fetch("http://localhost:3000/user/" + id + (gettype !== "" ? "/" : "") + gettype);
         const json = await data.json();
         return transformDatas(type, json.data);
     }else{
-        switch (type) {
+        switch (gettype) {
             case "":
                 return transformDatas(type, mockdatas.USER_MAIN_DATA.find((current) => current.id === id))
 
-            case "/activity":
+            case "activity":
                 return transformDatas(type, mockdatas.USER_ACTIVITY.find(current => current.userId === id))
-            case "/average-sessions":
+            case "average-sessions":
                 return transformDatas(type, mockdatas.USER_AVERAGE_SESSIONS.find(current => current.userId === id))
 
-            case "/performance":
+            case "performance":
                 return transformDatas(type, mockdatas.USER_PERFORMANCE.find(current => current.userId === id))
         
             default:
@@ -26,11 +31,12 @@ export async function getDatas(id, type){
 }
 
 function transformDatas(type, data){
+
     switch (type) {
         case "":
             return data
 
-        case "/activity":
+        case "activity":
 
             let recentdata = []
             for (let index = 31; index > -1 ; index--) {
@@ -45,18 +51,45 @@ function transformDatas(type, data){
             }
             return transformedactivity
 
-        case "/average-sessions":
+        case "average-sessions":
             const transformedsessions = []
             data.sessions.forEach(element => {
                 transformedsessions.push(element.sessionLength)
             });
             return transformedsessions
-        case "/performance":
+
+        case "performance":
             let transformedperformance = {}
             data.data.forEach(element => {
                 transformedperformance[data.kind[element.kind]] = element.value
             });
             return transformedperformance
+        
+        case "today-score":
+            let score
+            if (data.todayScore) {
+                score = data.todayScore*100
+            }else{
+                score = data.score ? data.score*100 : 0
+            }
+            return score
+
+        case "key-data":
+            let keydata
+            if (data.keyData) {
+                keydata = data.keyData
+            }else{
+                keydata = {
+                calorieCount: 0,
+                
+                carbohydrateCount: 0,
+                
+                lipidCount: 0,
+                
+                proteinCount: 0
+                }
+            }
+            return keydata
             
         default:
             break;

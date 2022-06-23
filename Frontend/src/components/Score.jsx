@@ -5,25 +5,14 @@ import "../css/components/score.css"
 
 export function Score(props){
 
-  let score
-  if (props.scorecontainer.score) {
-    score = props.scorecontainer.score
-  }else{
-    score = 0
-  }
-
-  if (props.scorecontainer.todayScore) {
-    score = props.scorecontainer.todayScore
-  }
-
   const data = [
-    { name: 'progress', value: score*100 },
-    { name: 'complete progress', value: 100-score*100 }
+    { name: 'progress', value: props.score },
+    { name: 'complete progress', value: 100-props.score }
   ];
 
   return (
     <article className="score">
-        <p className="percentage">{score*100}%<br/><span>de votre<br/>objectif</span></p>
+        <p className="percentage">{props.score}%<br/><span>de votre<br/>objectif</span></p>
           <ResponsiveContainer width="100%" height="100%">
           <PieChart className="scorecircle" width="100%" height="100%">
           <Pie

@@ -30,7 +30,7 @@ export function Activity(props){
                   <XAxis dataKey={"day"} tickLine={false}/>
                   <YAxis hide="true" yAxisId={"left"} dataKey={"calories"} orientation="left"/>
                   <YAxis yAxisId={"right"} domain={[props.minkg - 1 , props.maxkg + 1]} ticks={[props.minkg - 1, ((props.minkg - 1) + (props.maxkg +1))/2 ,props.maxkg + 1]} dataKey={"kilogram"} orientation="right" axisLine={false} tickLine={false}/>
-                  <Tooltip formatter={getTooltipDatas} cursor={{fill: "#C4C4C4", opacity:"50%"}} labelStyle={{ display: "none" }} wrapperStyle={{textAlign: "center"}} contentStyle={{display: "flex", alignItems: "center", height: "3.93em", backgroundColor: "#E60000", border: "none"}} itemStyle={{color: "white", fontSize: "0.4375em"}}/>
+                  <Tooltip formatter={getTooltipDatas} cursor={{fill: "#C4C4C4", opacity:"50%"}} labelStyle={{ display: "none" }} wrapperStyle={{textAlign: "center"}} contentStyle={{display: "flex", alignItems: "center", height: "3.93em", backgroundColor: "#E60000", border: "none"}} itemStyle={{color: "white", fontSize: "1em"}}/>
                   <Bar barSize={8} yAxisId="right" dataKey="kilogram" fill="#282D30" radius={[20, 20, 0, 0]}/>
                   <Bar barSize={8} yAxisId="left" dataKey="calories" fill="#E60000" radius={[20, 20, 0, 0]}/>
                 </BarChart>

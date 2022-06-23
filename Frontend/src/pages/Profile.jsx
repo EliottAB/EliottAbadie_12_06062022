@@ -31,9 +31,11 @@ export function Profile(){
         (async () => {
             waitdatas({
                 globalInfos: await getDatas(userid, ""),
-                activity: await getDatas(userid, "/activity"),
-                sessions: await getDatas(userid, "/average-sessions"),
-                performances: await getDatas(userid, "/performance")
+                keyData: await getDatas(userid, "key-data"),
+                score: await getDatas(userid, "today-score"),
+                activity: await getDatas(userid, "activity"),
+                sessions: await getDatas(userid, "average-sessions"),
+                performances: await getDatas(userid, "performance")
             })
         })()
 
@@ -54,14 +56,14 @@ export function Profile(){
                     <section className="stats">
                         <Activity data={datas.activity.datas} minkg={datas.activity.minkg} maxkg={datas.activity.maxkg}></Activity>
                         <ul className="calories">
-                            <Calories type="calories" icon={caloriesicon} count={datas.globalInfos.keyData.calorieCount}/>
-                            <Calories type="proteines" icon={proteinesicon} count={datas.globalInfos.keyData.proteinCount}/>
-                            <Calories type="glucides" icon={glucidesicon} count={datas.globalInfos.keyData.carbohydrateCount}/>
-                            <Calories type="lipides" icon={lipidesicon} count={datas.globalInfos.keyData.lipidCount}/>
+                            <Calories type="calories" icon={caloriesicon} count={datas.keyData.calorieCount}/>
+                            <Calories type="proteines" icon={proteinesicon} count={datas.keyData.proteinCount}/>
+                            <Calories type="glucides" icon={glucidesicon} count={datas.keyData.carbohydrateCount}/>
+                            <Calories type="lipides" icon={lipidesicon} count={datas.keyData.lipidCount}/>
                         </ul>
                         <Duration sessionsLength={datas.sessions}/>
                         <Performances performances={datas.performances}/>
-                        <Score scorecontainer={datas.globalInfos}/>
+                        <Score score={datas.score}/>
                     </section>
                 </React.Fragment>
 
