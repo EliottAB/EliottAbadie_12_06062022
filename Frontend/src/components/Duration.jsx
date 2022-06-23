@@ -1,6 +1,7 @@
 import { LineChart, Line, XAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState } from 'react';
 import "../css/components/duration.css"
+import PropTypes from 'prop-types';
 
 export function Duration(props) {
 
@@ -82,3 +83,5 @@ export function Duration(props) {
     );
 
 }
+
+Duration.propTypes = {sessionsLength: PropTypes.array}

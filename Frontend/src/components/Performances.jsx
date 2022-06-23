@@ -1,5 +1,6 @@
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 import "../css/components/performances.css"
+import PropTypes from 'prop-types';
 
 export function Performances(props){
 
@@ -27,3 +28,5 @@ export function Performances(props){
     )
 
 }
+
+Performances.propTypes = {performances: PropTypes.object}

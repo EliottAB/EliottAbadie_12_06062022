@@ -39,4 +39,8 @@ export function Activity(props){
     );
 }
 
-Activity.propTypes = {data: PropTypes.array }
+Activity.propTypes = {
+  data: PropTypes.array,
+  minkg: PropTypes.number,
+  maxkg: PropTypes.number
+}

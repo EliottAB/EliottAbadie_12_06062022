@@ -1,5 +1,6 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import "../css/components/score.css"
+import PropTypes from 'prop-types';
 
 
 
@@ -30,3 +31,5 @@ export function Score(props){
       </article>
   );
 }
+
+Score.propTypes = {score: PropTypes.number}

@@ -1,4 +1,5 @@
 import "../css/components/calories.css"
+import PropTypes from 'prop-types';
 
 export function Calories(props){
 
@@ -12,4 +13,10 @@ export function Calories(props){
         </li>
     )
 
+}
+
+Calories.propTypes = {
+    type: PropTypes.string,
+    icon: PropTypes.string,
+    count: PropTypes.number
 }
