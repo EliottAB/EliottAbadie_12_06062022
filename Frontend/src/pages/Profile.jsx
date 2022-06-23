@@ -16,6 +16,7 @@ import glucidesicon from "../assets/glucides.svg"
 import lipidesicon from "../assets/lipides.svg"
 import proteinesicon from "../assets/proteines.svg"
 
+
 export function Profile(){
     let [datas, waitdatas] = useState()
     

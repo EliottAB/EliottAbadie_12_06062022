@@ -6,6 +6,12 @@ export function Activity(props){
 
   const data = props.data
   let unit
+  
+  /**
+   * get the good data for the ToolTip
+   * @param {object} e 
+   * @returns cusotom ToolTip data
+   */
   function getTooltipDatas(e){
     if (unit === "kcal" || unit === undefined) {
       unit = "kg"
