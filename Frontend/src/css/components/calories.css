@@ -5,7 +5,6 @@
     justify-content: space-between;
     flex-wrap: wrap;
     height: 38.3125em;
-
 }
 
 .calories li{
@@ -79,4 +78,13 @@
 
 .calories li:nth-child(4) img{
     width: 1.25em;
+}
+
+@media screen and (max-width: 1385px){
+    .calories{
+        grid-row: 3;
+        grid-column-end: span 2;
+        flex-direction: row;
+        height: 20em;
+    }
 }

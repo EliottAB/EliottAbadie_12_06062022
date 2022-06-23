@@ -8,7 +8,7 @@ aside{
     justify-content: space-between;
     background-color: black;
     width: 7.31em;
-    min-height: calc(100% - 1.5em);
+    min-height: calc(100% - 5.687em);
 }
 
 aside ul{
@@ -41,4 +41,10 @@ aside p{
     font-size: 0.75em;
     writing-mode: sideways-lr;
     color: white;
+}
+
+@media screen and (max-width: 720px){
+    aside{
+        min-height: calc(100% - 3em);
+    }
 }

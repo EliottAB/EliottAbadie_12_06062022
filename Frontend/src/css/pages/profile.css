@@ -1,5 +1,5 @@
 .mainprofile{
-    padding: 4.25em 0 4.25em 14em;
+    padding: 4.25em 6em 4.25em 14em;
 }
 
 .hello{
@@ -19,6 +19,7 @@
 .stats{
     display: grid;
     grid-template-columns: repeat(4, 17.39em);
+    max-width: 100% !important;
     margin-top: 4.8125em;
     grid-gap: 1em;
 }

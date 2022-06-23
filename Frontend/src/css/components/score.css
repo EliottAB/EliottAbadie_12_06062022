@@ -5,6 +5,7 @@
     height: 16.4375em;
     background-color: #FBFBFB;
     border-radius: 0.3125em;
+    overflow: hidden !important;
 }
 
 .score::before{
@@ -43,4 +44,10 @@
     line-height: 1.5em;
     font-weight: 500;
     color: grey;
+}
+
+@media screen and (max-width: 1080px){
+    .score{
+        grid-row: 4;
+    }
 }
